@@ -1,31 +1,63 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/shopspring/decimal"
 )
 
 func main() {
-	price, err := decimal.NewFromString("136.02")
+	fmt.Print("Enter the first number: ")
+
+	// Create a new reader for standard input
+	reader := bufio.NewReader(os.Stdin)
+
+	// Read input until a newLine character is encountered
+	input1, err := reader.ReadString('\n')
 	if err != nil {
-		panic(err)
+		fmt.Println("Error reading input:", err)
+		return
 	}
+	// Remove the newline character and any surrounding whitespace
+	first, _ := decimal.NewFromString(strings.TrimSpace(input1))
 
-	qty := decimal.NewFromInt(3)
+	fmt.Print("Enter the second number: ")
 
-	fee, _ := decimal.NewFromString(".035")
-	taxRate, _ := decimal.NewFromString("0.08875")
+	// Read input until a newLine character is encountered
+	input2, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
+	// Remove the newline character and any surrounding whitespace
+	second, _ := decimal.NewFromString(strings.TrimSpace(input2))
 
-	subTotal := price.Mul(qty)
+	fmt.Print("Enter the operation(+, -, /, *): ")
 
-	preTax := subTotal.Mul(fee.Add(decimal.NewFromFloat(1)))
+	// Read input until a newLine character is encountered
+	input3, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
+	// Remove the newline character and any surrounding whitespace
+	operation := strings.TrimSpace(input3)
 
-	total := preTax.Mul(taxRate.Add(decimal.NewFromFloat(1)))
-
-	fmt.Println("SubTotal: ", subTotal)
-	fmt.Println("Pre-tax: ", preTax)
-	fmt.Println("Taxes: ", total.Sub(preTax))
-	fmt.Println("Total: ", total)
-	fmt.Println("Tax rate: ", total.Sub(preTax).Div(preTax))
+	switch operation {
+	case "+":
+		res := first.Add(second)
+		fmt.Println("RESULT:", res)
+	case "-":
+		res := first.Sub(second)
+		fmt.Println("RESULT:", res)
+	case "*":
+		res := first.Mul(second)
+		fmt.Println("RESULT:", res)
+	case "/":
+		res := first.Div(second)
+		fmt.Println("RESULT:", res)
+	}
 }

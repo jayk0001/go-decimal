@@ -35,15 +35,15 @@ Comparison of Floating-Point Numbers: Directly comparing floating-point numbers 
 ## How to use it ...
 To install: 
 ```bash
-
-$ git clone https://github.com/jayk0001/go-decimal/
+git clone https://github.com/jayk0001/go-decimal.git
+cd go-decimal
 ```
 
 To run: 
 ```bash
-
-$ go run main.go #in project directory
+go run main.go
 ```
+
 The program will prompt 3 questions that taking user input in terminal following by enter key pressed to move next questions, enter desired number and operation in each question.
 1) Enter the first number: 
 2) Enter the second number: 
